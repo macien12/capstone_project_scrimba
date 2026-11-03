@@ -1,24 +1,19 @@
-/**
- * Challenge: get a random image from Unsplash and set it as the background
- * 
- * Part 1:
- * 
- * URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
- * (You can change the "query" at the end to whatever theme you want)
- * 
- * Change the body's backgroundImage to: 
- * `url(<insert the URL of the iamge from the API here>)`
- * 
- * (You may need to dig around the response body a bit to find this URL)
- * 
- * (Note I've already added some CSS to resize the image within the window.
- * Instructions for this were found on CSS Tricks: 
- * https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way)
- */
-
-fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=kjhgdsfljhalskjdhflaksdjhflkjhasdf")
     .then(res => res.json())
     .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.full})`
+        console.log(data.urls.regular)
+        document.body.style.backgroundImage = `url(${data.urls.regular})`
+		document.getElementById("author").textContent = `By: ${data.user.name}`
     })
-    
+    .catch(err => {
+        /**
+         * Challenge: get a URL for a default background image and set it here
+         * 
+         * 1. Change the query in the URL above back to something real
+         * 2. Log the image url to the console (replacing console.log(data) above)
+         * 3. Use that URL as the "default" background image to be used if 
+         *    the promise is ever rejected.
+         */
+        document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDE2NzA&ixlib=rb-1.2.1&q=80&w=1080)`
+        // Report the error to some kind of service
+    })
