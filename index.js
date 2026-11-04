@@ -23,17 +23,6 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
             <img src=${data.image.small} />
             <span>${data.name}</span>
         `
-        /**
-         * Challenge: Add the following data points underneath the 
-         * name and icon (1 paragraph each):
-         * 
-         * 1. Current price (data.market_data.current_price.usd)
-         * 2. 24-hour high price (data.market_data.high_24h.usd)
-         * 3. 24-hour low price (data.market_data.low_24h.usd)
-         * 
-         * Feel free to check the response data object for your own currency
-         * if you don't want to use USD.
-         */
         document.getElementById("crypto").innerHTML += `
             <p>🎯: $${data.market_data.current_price.usd}</p>
             <p>👆: $${data.market_data.high_24h.usd}</p>
@@ -41,3 +30,30 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         `
     })
     .catch(err => console.error(err))
+
+// function getCurrentTime() {
+//     const date = new Date()
+//     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+// }
+
+// setInterval(getCurrentTime, 1000)
+
+navigator.geolocation.getCurrentPosition(position => {
+    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+        .then(res => {
+            if (!res.ok) {
+                throw Error("Weather data not available")
+            }
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            document.getElementById("weather").innerHTML = `
+                <img src=${iconUrl} />
+                <p>${Math.round(data.main.temp)}º</p>
+                <p>${data.name}</p>
+            `
+        })
+        .catch(err => console.error(err))
+});
