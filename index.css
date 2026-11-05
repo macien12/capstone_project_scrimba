@@ -76,4 +76,17 @@ p.weather-temp {
 
 p#author {
     font-size: 1rem;
+    margin: 0;
+}
+
+div.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+div#quote {
+    text-align: right;
+    width: 20%;
+    font-size: 1.3rem;
 }
