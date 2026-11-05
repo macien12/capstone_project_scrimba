@@ -57,3 +57,19 @@ navigator.geolocation.getCurrentPosition(async position => {
         console.error(err)
     }
 });
+
+
+try {
+    const res = await fetch("https://api.quotable.io/quotes/random")
+
+    const data = await res.json()
+    console.log(data)
+    document.getElementById("quote").innerHTML = `
+        <p>${data[0].content}<p>
+        <p>~ ${data[0].author}</p>
+    `
+
+
+} catch (err) {
+    console.error(err)
+}
